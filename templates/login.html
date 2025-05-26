@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - Attendance System</title>
+    <style>
+    /* General Styling */
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    color: #4A148C;
+    background: rgb(245, 230, 255);
+    overflow: hidden;
+}
+
+/* Fade-in Animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Glassmorphism Effect */
+.login-container {
+    width: 100%;
+    max-width: 400px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(150, 90, 200, 0.3);
+    overflow: hidden;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(150, 90, 200, 0.2);
+    background: rgba(220, 180, 255, 0.3);
+    animation: fadeIn 0.8s ease-in-out;
+    padding: 20px;
+}
+
+.login-card {
+    padding: 20px 30px;
+}
+
+.login-header {
+    text-align: center;
+    margin-bottom: 20px;
+    animation: fadeIn 1s ease-in-out;
+}
+
+.login-header h2 {
+    margin: 0;
+    font-size: 28px;
+    color: rgb(150, 90, 200);
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.login-header p {
+    margin: 5px 0;
+    color: #4A148C;
+    font-size: 14px;
+    opacity: 0.8;
+}
+
+/* Input Fields */
+.input-group {
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.input-group label {
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 5px;
+    display: block;
+    color: #4A148C;
+    opacity: 0.9;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 12px;
+    font-size: 14px;
+    border: none;
+    border-radius: 8px;
+    box-sizing: border-box;
+    transition: all 0.3s;
+    background: rgba(255, 255, 255, 0.6);
+    color: #4A148C;
+    outline: none;
+    backdrop-filter: blur(5px);
+}
+
+.input-group input:focus {
+    border: 1px solid rgb(150, 90, 200);
+    transform: scale(1.05);
+    background: rgba(255, 255, 255, 0.8);
+}
+
+/* Show Password */
+.show-password {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    font-size: 12px;
+    cursor: pointer;
+    color: rgb(150, 90, 200);
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+.show-password:hover {
+    color: rgb(220, 180, 255);
+}
+
+/* Buttons */
+.btn {
+    width: 100%;
+    background: linear-gradient(90deg, rgb(150, 90, 200), rgb(220, 180, 255));
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.3s;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.btn:hover {
+    background: linear-gradient(90deg, rgb(220, 180, 255), rgb(150, 90, 200));
+    transform: scale(1.05);
+}
+
+/* Additional Links */
+.forgot-password, .register-link {
+    text-align: center;
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+.forgot-password a, .register-link a {
+    color: rgb(150, 90, 200);
+    text-decoration: none;
+    transition: color 0.3s;
+    font-weight: bold;
+}
+
+.forgot-password a:hover, .register-link a:hover {
+    text-decoration: underline;
+    color: rgb(220, 180, 255);
+}
+
+.register-link {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.register-link p {
+    margin: 0;
+    font-size: 14px;
+    color: #4A148C;
+}
+
+.register-link a {
+    color: rgb(150, 90, 200);
+    font-weight: bold;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.register-link a:hover {
+    text-decoration: underline;
+    color: rgb(220, 180, 255);
+}
+
+/* PARTICLE EFFECT */
+.particles {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    top: 0;
+    left: 0;
+}
+
+.particle {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background-color: rgba(150, 90, 200, 0.7);
+    border-radius: 50%;
+    opacity: 0.8;
+    animation: float 5s infinite ease-in-out;
+}
+
+@keyframes float {
+    0% { transform: translateY(0) scale(1); opacity: 0.5; }
+    50% { transform: translateY(-50px) scale(1.2); opacity: 1; }
+    100% { transform: translateY(0) scale(1); opacity: 0.5; }
+}
+
+    </style>
+
+</head>
+<body>
+    <div class="particles"></div>
+    <div class="login-container">
+        <!-- Login Form -->
+        <div class="login-card" id="login-form">
+            <div class="login-header">
+                <h2>Welcome</h2>
+                <p>Login to access your dashboard</p>
+            </div>
+            <form id="loginForm">
+                <div class="input-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username" placeholder="Enter your username" required>
+                </div>
+                <div class="input-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" placeholder="Enter your password" required>
+                    <div class="show-password" onclick="togglePassword()">Show</div>
+                </div>
+                <button type="submit" class="btn">Login</button>
+                <div class="forgot-password">
+                    <a href="#" onclick="showForgotPasswordForm()">Forgot your password?</a>
+                </div>
+                <div class="register-link">
+                    <p>Don't have an account? <a href="#" onclick="showRegisterForm()">Register here</a></p>
+                </div>
+            </form>
+        </div>
+
+        <!-- Forgot Password Form -->
+        <div class="login-card" id="forgot-password-form" style="display: none;">
+            <div class="login-header">
+                <h2>Reset Password</h2>
+                <p>Enter your email to reset your password</p>
+            </div>
+            <form id="forgotPasswordForm">
+                <div class="input-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                </div>
+                <button type="submit" class="btn">Send Reset Link</button>
+                <div class="register-link">
+                    <p>Remember your password? <a href="dasboard.html" onclick="showLoginForm()">Login here</a></p>
+                </div>
+            </form>
+        </div>
+
+        <!-- Registration Form -->
+        <div class="login-card" id="register-form" style="display: none;">
+            <div class="login-header">
+                <h2>Create an Account</h2>
+                <p>Register to access your dashboard</p>
+            </div>
+            <form id="registerForm">
+                <div class="input-group">
+                    <label for="new-username">Username</label>
+                    <input type="text" id="new-username" name="username" placeholder="Enter a username" required>
+                </div>
+                <div class="input-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="new-email" name="email" placeholder="Enter your email" required>
+                </div>
+                <div class="input-group">
+                    <label for="new-password">Password</label>
+                    <input type="password" id="new-password" name="password" placeholder="Create a password" required>
+                </div>
+                <button type="submit" class="btn">Register</button>
+                <div class="register-link">
+                    <p>Already have an account? <a href="#" onclick="showLoginForm()">Login here</a></p>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function togglePassword() {
+            const passwordField = document.getElementById("password");
+            const passwordButton = document.querySelector(".show-password");
+
+            if (passwordField.type === "password") {
+                passwordField.type = "text";  // Show the password
+                passwordButton.textContent = "Hide";  // Change button text to "Hide"
+            } else {
+                passwordField.type = "password";  // Hide the password
+                passwordButton.textContent = "Show";  // Change button text to "Show"
+            }
+        }
+        // Switch to Forgot Password Form
+function showForgotPasswordForm() {
+    document.getElementById('login-form').style.display = 'none';
+    document.getElementById('forgot-password-form').style.display = 'block';
+    document.getElementById('register-form').style.display = 'none';
+}
+
+// Switch to Registration Form
+function showRegisterForm() {
+    document.getElementById('login-form').style.display = 'none';
+    document.getElementById('forgot-password-form').style.display = 'none';
+    document.getElementById('register-form').style.display = 'block';
+}
+
+// Switch to Login Form
+function showLoginForm() {
+    document.getElementById('login-form').style.display = 'block';
+    document.getElementById('forgot-password-form').style.display = 'none';
+    document.getElementById('register-form').style.display = 'none';
+}
+
+// Handle Registration Form Submission
+document.getElementById('registerForm').addEventListener('submit', async function (e) {
+    e.preventDefault();
+
+    const username = document.getElementById('new-username').value;
+    const email = document.getElementById('new-email').value;
+    const password = document.getElementById('new-password').value;
+
+    // Send data to backend
+    const response = await fetch('http://127.0.0.1:5000/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, email, password })
+    });
+
+    const result = await response.json();
+    alert(result.message);  // Display response message from backend
+
+    if (response.ok) {
+        // Redirect to login form on successful registration
+        showLoginForm();
+    }
+});
+
+document.getElementById('loginForm').addEventListener('submit', async function (e) {
+    e.preventDefault();
+
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+
+    try {
+        // Send data to backend
+        const response = await fetch('http://127.0.0.1:5000/', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ username, password })
+        });
+
+        if (response.ok) {
+            // Redirect to dashboard on successful login
+            window.location.href = '/dashboard';
+        } else {
+            const result = await response.text();
+            alert(result); // Show error message from the server
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        alert('An error occurred while logging in.');
+    }
+});
+
+function createParticles() {
+            const particlesContainer = document.querySelector('.particles');
+            for (let i = 0; i < 50; i++) { // Increased from 30 to 50
+                let particle = document.createElement('div');
+                particle.classList.add('particle');
+                let size = Math.random() * 6 + 4;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                particle.style.top = `${Math.random() * 100}%`;
+                particle.style.left = `${Math.random() * 100}%`;
+                particle.style.animationDuration = `${Math.random() * 3 + 2}s`;
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        createParticles();
+
+    </script>
+
+   
+</body>
+</html>
